@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PLAID_CLIENT_ID: ${{ secrets.PLAID_CLIENT_ID }}
+      PLAID_SECRET: ${{ secrets.PLAID_SECRET }}
 
     steps:
     - uses: actions/checkout@v2
@@ -14,6 +17,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '11'
+        distribution: 'adoptopenjdk'
     - name: Build with Maven
       run: mvn clean install
     - name: Run tests
